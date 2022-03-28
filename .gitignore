@@ -35,3 +35,6 @@ yarn-error.log*
 
 
 trash/
+
+./package-lock.json
+./yarn.lock
