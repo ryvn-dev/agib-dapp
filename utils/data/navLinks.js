@@ -11,13 +11,8 @@ export const navLinks = [
     is_external: false,
   },
   {
-    name: "faq",
-    path: "/#b",
-    is_external: false,
-  },
-  {
     name: "team",
-    path: "/#b",
+    path: "/#team",
     is_external: false,
   },
   {
@@ -37,7 +32,7 @@ export const navLinks = [
   },
   {
     name: <img src="/opensea.svg" />,
-    path: "https://twitter.com/AGIB_NFT",
-    is_external: true,
+    path: "#",
+    is_external: false,
   },
 ];

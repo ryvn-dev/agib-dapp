@@ -29,10 +29,6 @@ export default function Home() {
         ></div>
       </div>
 
-      <div id="b" className="h-96">
-        <FAQ />
-      </div>
-
       
       <Team />
       
