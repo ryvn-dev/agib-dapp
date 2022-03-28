@@ -13,14 +13,15 @@ export default function GalleryMobile() {
             return (
               <div
                 key={item.tail}
+                className={"w-[75%] outline outline-offset-4 outline-1 outline-agib-sky"  + rounded[index]}
               >
                   <Image
-                    className={"outline outline-offset-1 outline-2 outline-agib-sky py-8" + rounded[index]}
+                    className={rounded[index]}
                     alt="Img of AGIB NFT"
                     src={item.tail}
                     width={512}
                     height={512}
-                    layout="fixed"
+                    layout="responsive"
                   />
               </div>
             );
