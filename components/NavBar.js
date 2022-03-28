@@ -9,7 +9,7 @@ export default function NavBar() {
 
   return (
     <nav className="p-7 absolute top-0 left-0 w-full">
-      <div className="container flex flex-warp justify-between items-center mx-auto">
+      <div className="container flex justify-between items-center mx-auto">
         <div className="w-[10%] order-1">
           <Image
             className=""
