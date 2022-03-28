@@ -6,7 +6,7 @@ export default function GalleryMobile() {
   const border = ["rounded-tl-full", "rounded-br-full", "", "rounded-br-full"];
 
   return (
-    <section id="gallery" className="block md:hidden container mx-auto">
+    <section id="gallery" className="block md:hidden container mx-auto mt-8">
         <div className="flex flex-col space-y-8 justify-center items-center py-[200px]">
           {demoImages.map((item, index) => {
             const rounded = [" rounded-tl-3xl", "", "", " rounded-br-3xl"];

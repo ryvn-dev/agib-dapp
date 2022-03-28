@@ -9,8 +9,8 @@ export default function NavBar() {
 
   return (
     <nav className="p-7 absolute top-0 left-0 w-full">
-      <div className="container flex justify-between items-center mx-auto">
-        <div className="w-[10%] order-1">
+      <div className="container flex flex-wrap justify-between items-center mx-auto">
+        <div className="w-[20%] md:w-[10%] order-1">
           <Image
             className=""
             src={agibLogo}
@@ -43,7 +43,7 @@ export default function NavBar() {
         </div>
         <div
           className={
-            "justify-between items-center w-full md:flex md:w-auto order-3" +
+            "justify-between items-center w-full pt-10 md:pt-[2px] md:flex md:w-auto order-3" +
             toggleMenuClass
           }
         >

@@ -3,15 +3,13 @@ import { Fragment, useState } from "react";
 
 const plans = [
   {
-    name: "One girl",
-    ram: "Get only one girl",
-    cpus: ":)",
+    name: "One AGIB Girl",
+    ram: "0.05 ETH",
     disk: "AGIB",
   },
   {
-    name: "Two girls",
-    ram: "Get only 2 girls",
-    cpus: ":)",
+    name: "Two AGIB Girls",
+    ram: "0.10 ETH",
     disk: "AGIB",
   },
 ];
@@ -45,7 +43,7 @@ export default function Mint() {
 
   return (
     <>
-      <div className="absolute top-[40%] left-[12%] w-[32%]">
+      <div className="absolute top-[120%] left-[20%] w-[60%] md:top-[40%] md:left-[12%] md:w-[32%]">
         <button
           type="button"
           onClick={openModal}
@@ -95,7 +93,7 @@ export default function Mint() {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  How many girls you wanna save?
+                  How Many AGIB Girls You Want To Rescue?
                 </Dialog.Title>
 
                 <div className="w-full px-4 pb-4 pt-6">
@@ -147,7 +145,7 @@ export default function Mint() {
                                         }`}
                                       >
                                         <span>
-                                          {plan.ram}/{plan.cpus}
+                                          {plan.ram}
                                         </span>{" "}
                                         <span aria-hidden="true">&middot;</span>{" "}
                                         <span>{plan.disk}</span>
@@ -175,7 +173,7 @@ export default function Mint() {
                     className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                     onClick={closeModal}
                   >
-                    Save Them!
+                    Save Them !
                   </button>
                 </div>
               </div>
