@@ -7,7 +7,7 @@ export default function Gallery() {
 
   return (
     <section className="hidden md:block container mx-auto">
-      <div id="gallery" className="w-full flex justify-center py-[200px]">
+      <div className="w-full flex justify-center py-[200px]">
         <div className="flex space-x-8 h-[32rem] w-[55vw] group">
           {demoImages.map((item, index) => {
             const rounded = [" rounded-tl-3xl", "", "", " rounded-br-3xl"];

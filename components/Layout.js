@@ -21,7 +21,7 @@ export default function Layout({ children }) {
               priority={true}
             />
           </div>
-          <div className="md:hidden">
+          <div className="pt-24 md:hidden">
             <Image
               src="/banner_mobile.png"
               alt="banner image"
@@ -37,14 +37,13 @@ export default function Layout({ children }) {
             crypto girlfriend and want to be part of.
           </div>
           <div className="absolute top-[75%] left-[2%] w-[95%] z-10 md:hidden">
-            
             <Image
-                src="/biglogo.png"
-                alt="biglogo image"
-                width={693}
-                height={355}
-                layout="responsive"
-                priority={true}
+              src="/biglogo.png"
+              alt="biglogo image"
+              width={693}
+              height={355}
+              layout="responsive"
+              priority={true}
             />
           </div>
           <Story />

@@ -9,7 +9,7 @@ const plans = [
   },
   {
     name: "Two AGIB Girls",
-    ram: "0.10 ETH",
+    ram: "0.09 ETH",
     disk: "AGIB",
   },
 ];
@@ -47,7 +47,7 @@ export default function Mint() {
         <button
           type="button"
           onClick={openModal}
-          className="px-4 py-2 w-full text-xl font-bold tracking-widest text-agib-blue bg-white rounded-md bg-opacity-50 hover:bg-agib-pink hover:text-white"
+          className="px-4 py-2 w-full text-xl font-bold tracking-widest text-agib-blue border-2 border-agib-blue rounded-md hover:border-agib-pink hover:bg-agib-pink hover:text-white"
         >
           MINT
         </button>
@@ -144,9 +144,7 @@ export default function Mint() {
                                             : "text-gray-500"
                                         }`}
                                       >
-                                        <span>
-                                          {plan.ram}
-                                        </span>{" "}
+                                        <span>{plan.ram}</span>{" "}
                                         <span aria-hidden="true">&middot;</span>{" "}
                                         <span>{plan.disk}</span>
                                       </RadioGroup.Description>

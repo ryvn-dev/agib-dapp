@@ -10,12 +10,20 @@ export default function NavItems() {
           <li key={index}>
             <Link href={link.path} passHref={link.is_external}>
               <a
-                className="flex justify-between py-2 pr-4 pl-3 text-black uppercase border-0 hover:backdrop-blur-md font-bold tracking-wider duration-1000
+                className="flex justify-between py-2 pr-4 pl-3 text-black uppercase bg-white bg-opacity-40 hover:backdrop-blur-md border-0 font-bold tracking-wider md:duration-1000
                               md:h-fit md:px-3 md:items-center md:border-0 md:rounded md:bg-agib-pink md:bg-opacity-40 md:hover:bg-opacity-0 md:hover:backdrop-blur-none"
               >
-                <span className="hidden md:inline">{link.mark ? link.mark : link.name}</span>
-                <span className="md:hidden">{link.name}</span>  
-                <span className={"md:hidden " + (link.is_external ? "inline": "hidden")}>{link.mark}</span>
+                <span className="hidden md:inline">
+                  {link.mark ? link.mark : link.name}
+                </span>
+                <span className="md:hidden">{link.name}</span>
+                <span
+                  className={
+                    "md:hidden " + (link.is_external ? "inline" : "hidden")
+                  }
+                >
+                  {link.mark}
+                </span>
               </a>
             </Link>
           </li>

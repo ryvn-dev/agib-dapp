@@ -1,8 +1,5 @@
 export const navLinks = [
-  { name: "Home",
-    mark: "",
-    path: "/", 
-    is_external: false },
+  { name: "Home", mark: "", path: "/", is_external: false },
   {
     name: "gallery",
     mark: "",
