@@ -43,15 +43,15 @@ export default function Mint() {
 
   return (
     <>
-      <div className="absolute top-[120%] left-[20%] w-[60%] md:top-[40%] md:left-[12%] md:w-[32%]">
-        <button
-          type="button"
-          onClick={openModal}
-          className="px-4 py-2 w-full text-xl font-bold tracking-widest text-agib-blue border-2 border-agib-blue rounded-md hover:border-agib-pink hover:bg-agib-pink hover:text-white"
-        >
-          MINT
-        </button>
-      </div>
+      
+      <button
+        type="button"
+        onClick={openModal}
+        className="px-4 py-2 w-full text-xl font-bold tracking-widest text-agib-blue border-2 border-agib-blue rounded-md hover:border-agib-pink hover:bg-agib-pink hover:text-white"
+      >
+        MINT
+      </button>
+    
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
