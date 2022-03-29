@@ -43,7 +43,6 @@ export default function Mint() {
 
   return (
     <>
-      
       <button
         type="button"
         onClick={openModal}
@@ -51,7 +50,6 @@ export default function Mint() {
       >
         MINT
       </button>
-    
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog

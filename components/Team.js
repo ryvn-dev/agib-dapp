@@ -19,7 +19,7 @@ export default function Team() {
             return (
               <div
                 key={item.name}
-                className="flex flex-col items-center w-[75vw] md:w-1/4"
+                className="flex flex-col items-center w-[75vw] md:w-[20%]"
               >
                 <img
                   className="inline-block border border-agib-pink border-4 rounded-full ring-2 ring-white h-[12.5rem]"

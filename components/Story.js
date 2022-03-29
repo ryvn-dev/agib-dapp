@@ -2,21 +2,19 @@ import React from "react";
 
 export default function Story() {
   return (
-    <div className="absolute top-[68%] left-[20%] w-[60%] text-white hidden md:block">
+    <div className="absolute top-[66%] left-[20%] w-[60%] text-white hidden md:block">
       <div className="flex flex-col justify-center items-center">
-        <div className="text-4xl font-bold tracking-wide py-4">
+        <div className="md:text-5xl lg:text-7xl xl:text-8xl font-bold tracking-wide md:py-8 lg:py-16">
           Rescue Mission
         </div>
 
-        <div className="text-xl leading-7">
+        <div className="lg:leading-8 xl:leading-10 md:text-base lg:text-lg xl:text-xl">
           Not long ago, in another dimension dominated by AI, there are a lot of
           cute girls trapped in there, trying to run away from the AIs control.
           AGIB (A-Girlfriend-Is-Born) team decides to help these girls, we break
-          into that dimension and try to bring them to our dimension. And we did
-          it, AGIB team just rescued many cute homeless girls from the virtual
-          world of AI. but the new problem is that we dont have enough room for
-          these cuties, we are now looking for new homes for all of them, maybe
-          you are the one who takes one of them home.
+          into that space and try to bring them into our dimension. However, we
+          failed. AGIB team needs everybody to rescue many cute girls from the
+          virtual world of AI. Could you do them a favor?
         </div>
       </div>
     </div>
