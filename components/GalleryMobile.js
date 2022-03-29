@@ -82,9 +82,9 @@ export default function Carousel_old() {
     // Finally the image itself will be 100% of a parent div. Outer div is
     // set with position relative, so we can place our cotrol buttons using
     // absolute positioning on each side of the image.
-    <section className="w-screen flex justify-center my-72 md:hidden">
+    <section className="w-screen flex justify-center mt-72 mb-48 md:hidden">
       <div className="p-12 flex justify-center w-screen items-center">
-        <div className="relative w-11/12 outline-1 outline outline-offset-4 outline-agib-sky flex rounded-tl-lg rounded-br-lg">
+        <div className="relative w-full outline-1 outline outline-offset-4 outline-agib-sky flex rounded-tl-lg rounded-br-lg">
           <div className="carousel">
             {sliderControl(true)}
             {images.map((img, i) => (
