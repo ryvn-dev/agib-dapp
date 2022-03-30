@@ -8,7 +8,7 @@ export default function Story() {
           Rescue Mission
         </div>
 
-        <div className="text-center leading-[3vw] md:text-[2vw]">
+        <div className="text-center leading-[3vw] md:text-[1.5vw]">
           Not long ago, in another dimension dominated by AI, there are a lot of
           cute girls trapped in there, trying to run away from the AIs control.
           AGIB (A-Girlfriend-Is-Born) team decides to help these girls, we break

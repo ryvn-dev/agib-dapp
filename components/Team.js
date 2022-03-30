@@ -2,6 +2,8 @@ import React from "react";
 import { Authors } from "../utils/data/aboutAuthors";
 
 export default function Team() {
+  const borderColors = [" border-agib-blue border-opacity-60", " border-agib-purple", " border-agib-sky", " border-agib-pink border-opacity-60"]
+  const textColors = [" text-agib-blue text-opacity-60", " text-agib-purple", " text-agib-sky", " text-agib-pink  text-opacity-60"]
   return (
     <div id="team" className="py-32">
       <div className="relative">
@@ -22,15 +24,15 @@ export default function Team() {
                 className="flex flex-col items-center w-[75vw] md:w-[20%]"
               >
                 <img
-                  className="inline-block border border-agib-pink border-4 rounded-full ring-2 ring-white h-[12.5rem]"
+                  className={"inline-block border border-4 rounded-full ring-2 ring-white h-[35vw] w-[35vw] md:h-[15vw] md:w-[15vw]" + borderColors[index]}
                   src={item.img_path}
                   alt=""
                 />
-                <div className="flex flex-col h-[5.5rem] w-2/3 bg-agib-pink rounded-2xl -mt-6 text-center text-white justify-center items-center overflow-hidden">
-                  <div className="font-bold text-xl mt-2 tracking-widest">
+                <div className="mt-2 flex flex-col text-center justify-center items-center">
+                  <div className={"font-bold text-[4vw] md:text-[1.5vw] mt-2 tracking-widest" + textColors[index]}>
                     {item.name}
                   </div>
-                  <p className="font-medium text-base mb-2 text-[#db6a8d]">
+                  <p className="font-medium text-[2vw] md:text-[1vw] mb-2 text-[#db6a8d]">
                     {item.title}
                   </p>
                 </div>

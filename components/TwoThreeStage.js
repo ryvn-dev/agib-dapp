@@ -66,7 +66,7 @@ export default function TwoThreeStage() {
                 </div>
                 <div className="sm:hidden text-center">
                   <Disclosure>
-                    <Disclosure.Button>
+                    <Disclosure.Button className="w-full">
                       <dt className="font-semibold text-lg text-[#f556a4] flex justify-center">
                         <img
                           className="h-[1.3em] contain-fit px-1"
@@ -75,7 +75,7 @@ export default function TwoThreeStage() {
                         {feature.name}
                       </dt>
                     </Disclosure.Button>
-                    <Disclosure.Panel>
+                    <Disclosure.Panel className="w-full">
                       <dd className="mt-2 text-base text-white text-center">
                         {feature.description}
                       </dd>

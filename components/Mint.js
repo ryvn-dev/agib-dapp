@@ -48,18 +48,27 @@ const mintViaMeta = async (web3, sender, mint_num) => {
   console.log(`payWithMetamask(receiver=${CONTRACT_ADDRESS}, sender=${sender}, mint_num=${mint_num})`)
 
   try {
+      const paramsEst = {
+        from: sender.toString(), 
+        value: 60000000000000000, 
+        gas: 30000000
+      }
       const block = await web3.eth.getBlock("latest");
       const gasPrice = await web3.eth.getGasPrice(); //這樣嗎 
-      const gasLimit = block.gasLimit/block.transactions.length;
-      const gasLimit2 = await MyContract.methods.mintNFTDuringPresale(mint_num).estimateGas()
+      // const gasLimit = block.gasLimit/block.transactions.length;
+      const gasLimit = await MyContract.methods.mintNFT(mint_num.toString()).estimateGas(paramsEst)
+      console.log(`gasPrice = ${gasPrice}`)
+      console.log(`gasLimit = ${gasLimit}`)
       const params = {
             from: sender.toString(),
-            gas: parseInt(gasLimit2), //那這邊要設多少 對阿
-            value: 50000000000000000,
-            maxFeePerGas: 40000000000, // 其他都對了嗎  目前參數都對嗎
+            gas: gasLimit, //那這邊要設多少 對阿
+            value: 60000000000000000,
+            gasPrice: gasPrice*30,
+            maxFeePerGas: gasPrice*35, // 其他都對了嗎  目前參數都對嗎
+            maxPriorityFeePerGas: gasPrice*34,
       };
      
-      await MyContract.methods.mintNFTDuringPresale(mint_num).send(params) //OK?
+      // await MyContract.methods.mintNFT(mint_num.toString()).send(params) //OK?
       console.log('success');
   } catch(e) {
       console.log("payment fail!");
@@ -91,8 +100,8 @@ export default function Mint() {
       console.log("Library Info")
       console.log(library)
       await mintViaMeta(library, account, mint_num)
-      console.log("Deactivating ...")
-      deactivate()
+      // console.log("Deactivating ...")
+      // deactivate()
     } catch (ex) {
       console.log(ex)
     }
