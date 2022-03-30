@@ -12,12 +12,15 @@
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
     "next": "12.0.10",
     "prettier": "^2.5.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-twentytwenty": "^1.2.1",
-    "tailwindcss": "^3.0.22"
+    "tailwindcss": "^3.0.22",
+    "web3": "^1.7.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",

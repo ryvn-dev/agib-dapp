@@ -1,18 +1,27 @@
 import { RadioGroup, Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import { useWeb3React } from "@web3-react/core"
+import Web3 from "web3";
+import { injected } from "../utils/script/connectors"
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../utils/data/contractInfo";
+
+
 
 const plans = [
   {
+    mint: 1,
     name: "One AGIB Girl",
     ram: "0.05 ETH",
     disk: "AGIB",
   },
   {
+    mint: 2,
     name: "Two AGIB Girls",
     ram: "0.09 ETH",
     disk: "AGIB",
   },
 ];
+
 
 function CheckIcon(props) {
   return (
@@ -29,21 +38,73 @@ function CheckIcon(props) {
   );
 }
 
+
+const mintViaMeta = async (web3, sender, mint_num) => {
+
+  const MyContract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+  
+  console.log("Contract Info")
+  console.log(MyContract)
+  console.log(`payWithMetamask(receiver=${CONTRACT_ADDRESS}, sender=${sender}, mint_num=${mint_num})`)
+
+  try {
+      const block = await web3.eth.getBlock("latest");
+      const gasPrice = await web3.eth.getGasPrice(); //這樣嗎 
+      const gasLimit = block.gasLimit/block.transactions.length;
+      const gasLimit2 = await MyContract.methods.mintNFTDuringPresale(mint_num).estimateGas()
+      const params = {
+            from: sender.toString(),
+            gas: parseInt(gasLimit2), //那這邊要設多少 對阿
+            value: 50000000000000000,
+            maxFeePerGas: 40000000000, // 其他都對了嗎  目前參數都對嗎
+      };
+     
+      await MyContract.methods.mintNFTDuringPresale(mint_num).send(params) //OK?
+      console.log('success');
+  } catch(e) {
+      console.log("payment fail!");
+      console.log(e); 
+  }
+}
+
+
 export default function Mint() {
   let [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(plans[0]);
 
   function closeModal() {
     setIsOpen(false);
+    mintAGIB(selected.mint);
   }
 
   function openModal() {
     setIsOpen(true);
   }
 
+  // transaction start here
+  const {account, library, activate, deactivate} = useWeb3React()
+  
+  const mintAGIB = async (mint_num) => {
+    try {
+      console.log("Activating ...")
+      await activate(injected)
+      console.log("Library Info")
+      console.log(library)
+      await mintViaMeta(library, account, mint_num)
+      console.log("Deactivating ...")
+      deactivate()
+    } catch (ex) {
+      console.log(ex)
+    }
+  }
+
+
+
+
   return (
     <>
       <button
+        disabled
         type="button"
         onClick={openModal}
         className="px-4 py-2 w-full text-xl font-bold tracking-widest text-agib-blue border-2 border-agib-blue rounded-md hover:border-agib-pink hover:bg-agib-pink hover:text-white"

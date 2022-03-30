@@ -20,13 +20,14 @@ export default function Home() {
       </div>
 
       <div id="roadmap" className="overflow-x items-center -mb-[54rem]">
-        <div className="my-32 bg-agib-purple h-[45rem] transform -rotate-6 scale-[1.3] opacity-40 mix-blend-overlay"></div>
+        <div className="my-32 bg-agib-purple h-[45rem] transform -rotate-6 scale-[1.3] opacity-40 mix-blend-soft-light"></div>
       </div>
 
       <Cards />
 
-      <div className="relative top-24 overflow-hidden items-center">
-        <div className="my-32 bg-agib-sky bg-opacity-60 mix-blend-overlay">
+      <div className="relative overflow-hidden items-center z-10">
+        {/* <img className="absolute -left-[5%] top-[calc(38rem-39vw)] w-3/12 hidden md:block" src="heart_da.png" /> */}
+        <div className="mt-20 md:mt-[calc(38rem-24vw)] bg-[#f4c4dc] mix-blend-soft-light z-20">
           <TwoThreeStage />
         </div>
       </div>
