@@ -24,7 +24,7 @@ export default function Team() {
                 className="flex flex-col items-center w-[75vw] md:w-[20%]"
               >
                 <img
-                  className={"inline-block border border-4 rounded-full ring-2 ring-white h-[35vw] w-[35vw] md:h-[15vw] md:w-[15vw]" + borderColors[index]}
+                  className={"inline-block border border-4 rounded-full ring-2 ring-white h-[30vw] w-[30vw] md:h-[12vw] md:w-[12vw]" + borderColors[index]}
                   src={item.img_path}
                   alt=""
                 />
@@ -32,7 +32,7 @@ export default function Team() {
                   <div className={"font-bold text-[4vw] md:text-[1.5vw] mt-2 tracking-widest" + textColors[index]}>
                     {item.name}
                   </div>
-                  <p className="font-medium text-[2vw] md:text-[1vw] mb-2 text-[#db6a8d]">
+                  <p className={"font-medium text-[2vw] md:text-[1vw] mb-2" + textColors[index]}>
                     {item.title}
                   </p>
                 </div>

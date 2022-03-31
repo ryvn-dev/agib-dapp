@@ -47,7 +47,7 @@ export default function NavBar() {
             toggleMenuClass
           }
         >
-          <NavItems />
+          <NavItems setMenu={setMenu} />
         </div>
       </div>
     </nav>

@@ -88,9 +88,9 @@ export default function TwoThreeStage() {
         </div>
         <div className="p-[5vw]">
           <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-4 lg:gap-6">
-            <img src="land.gif" className="bg-gray-100 rounded-lg" />
-            <img src="aiko.png" className="bg-gray-100 rounded-lg" />
+            <img src="yumi_sketch.png" className="bg-gray-100 rounded-lg" />
             <img src="yumi.png" className="bg-gray-100 rounded-lg" />
+            <img src="land2.gif" className="bg-gray-100 rounded-lg" />
             <img src="land.gif" className="bg-gray-100 rounded-lg" />
           </div>
         </div>
