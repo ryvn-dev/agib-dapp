@@ -39,7 +39,7 @@ export const navLinks = [
   {
     name: "Opensea",
     mark: <img src="/opensea.svg" />,
-    path: "https://twitter.com/AGIB_NFT",
+    path: "https://opensea.io/collection/agib",
     is_external: true,
   },
 ];
