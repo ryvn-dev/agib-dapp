@@ -109,6 +109,7 @@ const mintViaMeta = async (web3, sender, mint_num) => {
         .estimateGas(paramsEst);
     } catch (err) {
         alert("Your ETH is not enough!")
+        alert(err.message)
     }
     
     const gasLimit = await MyContract.methods
