@@ -102,10 +102,18 @@ const mintViaMeta = async (web3, sender, mint_num) => {
     // console.log(BASE)
     // console.log(PRIORITY)
     // console.log(MAX)
-
+    
+    try {
+        const gasLimit = await MyContract.methods
+        .mintNFTDuringPresale(mint_num.toString())
+        .estimateGas(paramsEst);
+    } catch (err) {
+        alert("Your ETH is not enough!")
+    }
+    
     const gasLimit = await MyContract.methods
-      .mintNFTDuringPresale(mint_num.toString())
-      .estimateGas(paramsEst);
+        .mintNFTDuringPresale(mint_num.toString())
+        .estimateGas(paramsEst);
 
     const params = {
       from: sender.toString(),
