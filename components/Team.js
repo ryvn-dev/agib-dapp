@@ -2,8 +2,18 @@ import React from "react";
 import { Authors } from "../utils/data/aboutAuthors";
 
 export default function Team() {
-  const borderColors = [" border-agib-blue border-opacity-60", " border-agib-purple", " border-agib-sky", " border-agib-pink border-opacity-60"]
-  const textColors = [" text-agib-blue text-opacity-60", " text-agib-purple", " text-agib-sky", " text-agib-pink  text-opacity-60"]
+  const borderColors = [
+    " border-agib-blue border-opacity-60",
+    " border-agib-purple",
+    " border-agib-sky",
+    " border-agib-pink border-opacity-60",
+  ];
+  const textColors = [
+    " text-agib-blue text-opacity-60",
+    " text-agib-purple",
+    " text-agib-sky",
+    " text-agib-pink  text-opacity-60",
+  ];
   return (
     <div id="team" className="py-32">
       <div className="relative">
@@ -24,15 +34,28 @@ export default function Team() {
                 className="flex flex-col items-center w-[75vw] md:w-[20%]"
               >
                 <img
-                  className={"inline-block border border-4 rounded-full ring-2 ring-white h-[30vw] w-[30vw] md:h-[12vw] md:w-[12vw]" + borderColors[index]}
+                  className={
+                    "inline-block border border-4 rounded-full ring-2 ring-white h-[30vw] w-[30vw] md:h-[12vw] md:w-[12vw]" +
+                    borderColors[index]
+                  }
                   src={item.img_path}
                   alt=""
                 />
                 <div className="mt-2 flex flex-col text-center justify-center items-center">
-                  <div className={"font-bold text-[4vw] md:text-[1.5vw] mt-2 tracking-widest" + textColors[index]}>
+                  <div
+                    className={
+                      "font-bold text-[4vw] md:text-[1.5vw] mt-2 tracking-widest" +
+                      textColors[index]
+                    }
+                  >
                     {item.name}
                   </div>
-                  <p className={"font-medium text-[2vw] md:text-[1vw] mb-2" + textColors[index]}>
+                  <p
+                    className={
+                      "font-medium text-[2vw] md:text-[1vw] mb-2" +
+                      textColors[index]
+                    }
+                  >
                     {item.title}
                   </p>
                 </div>

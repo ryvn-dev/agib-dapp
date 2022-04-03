@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { navLinks } from "../utils/data/navLinks";
 
-export default function NavItems({setMenu}) {
+export default function NavItems({ setMenu }) {
   return (
     <ul className="flex flex-col space-x-0 space-y-4 md:flex-row md:space-x-2 md:space-y-0 md:text-md md:font-medium md:items-center">
       {navLinks.map((link, index) => {

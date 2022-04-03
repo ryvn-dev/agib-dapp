@@ -1,11 +1,9 @@
 import { RadioGroup, Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { useWeb3React } from "@web3-react/core"
+import { useWeb3React } from "@web3-react/core";
 import Web3 from "web3";
-import { injected } from "../utils/script/connectors"
+import { injected } from "../utils/script/connectors";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../utils/data/contractInfo";
-
-
 
 const plans = [
   {
@@ -22,7 +20,6 @@ const plans = [
   },
 ];
 
-
 function CheckIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
@@ -38,44 +35,102 @@ function CheckIcon(props) {
   );
 }
 
+function formatFeeHistory(result, includePending, historicalBlocks) {
+  let blockNum = Number(result.oldestBlock);
+  let index = 0;
+  const blocks = [];
 
-const mintViaMeta = async (web3, sender, mint_num) => {
-
-  const MyContract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
-  
-  console.log("Contract Info")
-  console.log(MyContract)
-  console.log(`payWithMetamask(receiver=${CONTRACT_ADDRESS}, sender=${sender}, mint_num=${mint_num})`)
-
-  try {
-      const paramsEst = {
-        from: sender.toString(), 
-        value: 60000000000000000, 
-        gas: 30000000
-      }
-      const block = await web3.eth.getBlock("latest");
-      const gasPrice = await web3.eth.getGasPrice(); //這樣嗎 
-      // const gasLimit = block.gasLimit/block.transactions.length;
-      const gasLimit = await MyContract.methods.mintNFT(mint_num.toString()).estimateGas(paramsEst)
-      console.log(`gasPrice = ${gasPrice}`)
-      console.log(`gasLimit = ${gasLimit}`)
-      const params = {
-            from: sender.toString(),
-            gas: gasLimit, //那這邊要設多少 對阿
-            value: 60000000000000000,
-            gasPrice: gasPrice*30,
-            maxFeePerGas: gasPrice*35, // 其他都對了嗎  目前參數都對嗎
-            maxPriorityFeePerGas: gasPrice*34,
-      };
-     
-      // await MyContract.methods.mintNFT(mint_num.toString()).send(params) //OK?
-      console.log('success');
-  } catch(e) {
-      console.log("payment fail!");
-      console.log(e); 
+  while (blockNum < Number(result.oldestBlock) + historicalBlocks) {
+    blocks.push({
+      number: blockNum,
+      baseFeePerGas: Number(result.baseFeePerGas[index]),
+      gasUsedRatio: Number(result.gasUsedRatio[index]),
+      priorityFeePerGas: result.reward[index].map((x) => Number(x)),
+    });
+    blockNum += 1;
+    index += 1;
   }
+
+  if (includePending) {
+    blocks.push({
+      number: "pending",
+      baseFeePerGas: Number(result.baseFeePerGas[historicalBlocks]),
+      gasUsedRatio: NaN,
+      priorityFeePerGas: [],
+    });
+  }
+  return blocks;
 }
 
+const mintViaMeta = async (web3, sender, mint_num) => {
+  const VALUE = mint_num == 1 ? "50000000000000000" : "90000000000000000";
+  const MyContract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+
+  console.log("Contract Info");
+  console.log(MyContract);
+  console.log(
+    `payWithMetamask(receiver=${CONTRACT_ADDRESS}, sender=${sender}, mint_num=${mint_num})`
+  );
+
+  try {
+    const paramsEst = {
+      from: sender.toString(),
+      value: VALUE,
+      gas: 80000000,
+    };
+
+    // OLD METHOD
+    // const block = await web3.eth.getBlock("latest");
+    // const gasPrice = await web3.eth.getGasPrice();
+    // const gasLimit = block.gasLimit/block.transactions.length;
+
+    // param=> block count, , PR
+    const historicalBlocks = 4;
+    const feeHistory = await web3.eth.getFeeHistory(
+      historicalBlocks,
+      "pending",
+      [10, 50]
+    );
+    const blocks = formatFeeHistory(feeHistory, false, historicalBlocks);
+    console.log(blocks);
+
+    const BASE = blocks[blocks.length - 1].baseFeePerGas;
+    // const PRIORITY = blocks[blocks.length - 1].priorityFeePerGas[0]
+    const PRIORITY = 2500000000;
+    const MAX = 2 * BASE + PRIORITY;
+
+    // console.log(BASE)
+    // console.log(PRIORITY)
+    // console.log(MAX)
+
+    const gasLimit = await MyContract.methods
+      .mintNFTDuringPresale(mint_num.toString())
+      .estimateGas(paramsEst);
+
+    const params = {
+      from: sender.toString(),
+      gas: parseInt(gasLimit * 1.1),
+      value: VALUE,
+      maxFeePerGas: MAX,
+      maxPriorityFeePerGas: PRIORITY,
+    };
+
+    console.log("Param Info");
+    console.log(params);
+    const t1 = await MyContract.methods.totalSupply().call();
+    const receipt = await MyContract.methods
+      .mintNFTDuringPresale(mint_num.toString())
+      .send(params); //OK?
+    const t2 = await MyContract.methods.totalSupply().call();
+
+    console.log(`I have minted ${t2 - t1} NFTs`);
+    console.log(receipt);
+    console.log("Success");
+  } catch (err) {
+    console.log("Payment Fail!");
+    console.log(err);
+  }
+};
 
 export default function Mint() {
   let [isOpen, setIsOpen] = useState(false);
@@ -87,33 +142,41 @@ export default function Mint() {
   }
 
   function openModal() {
+    syncAGIB();
     setIsOpen(true);
   }
 
   // transaction start here
-  const {account, library, activate, deactivate} = useWeb3React()
-  
+  const web3react = useWeb3React();
+
   const mintAGIB = async (mint_num) => {
     try {
-      console.log("Activating ...")
-      await activate(injected)
-      console.log("Library Info")
-      console.log(library)
-      await mintViaMeta(library, account, mint_num)
+      // console.log("Activating ...")
+      // await web3react.activate(injected)
+      console.log("Library Info");
+      console.log(web3react.library);
+      await mintViaMeta(web3react.library, web3react.account, mint_num);
       // console.log("Deactivating ...")
       // deactivate()
     } catch (ex) {
-      console.log(ex)
+      console.log(ex);
     }
-  }
+  };
 
-
-
+  const syncAGIB = async () => {
+    try {
+      console.log("Activating ...");
+      await web3react.activate(injected);
+    } catch (ex) {
+      console.log(ex);
+      alert("Cannot Connect to Your Wallet!");
+    }
+  };
 
   return (
     <>
       <button
-        disabled
+        // disabled
         type="button"
         onClick={openModal}
         className="px-4 py-2 w-full text-xl font-bold tracking-widest text-agib-blue border-2 border-agib-blue rounded-md hover:border-agib-pink hover:bg-agib-pink hover:text-white"
