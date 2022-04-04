@@ -97,7 +97,7 @@ const mintViaMeta = async (web3, sender, mint_num) => {
     const BASE = blocks[blocks.length - 1].baseFeePerGas;
     // const PRIORITY = blocks[blocks.length - 1].priorityFeePerGas[0]
     const PRIORITY = 2500000000;
-    const MAX = 1.2 * BASE + PRIORITY;
+    const MAX = parseInt(1.2 * BASE + PRIORITY);
 
     // console.log(BASE)
     // console.log(PRIORITY)
