@@ -69,7 +69,7 @@ const mintViaMeta = async (web3, sender, mint_num) => {
   console.log("Contract Info");
   console.log(MyContract);
   console.log(
-    `payWithMetamask(receiver=${CONTRACT_ADDRESS}, sender=${sender}, mint_num=${mint_num})`
+    `payWithMetamask(receiver=${CONTRACT_ADDRESS}, sender=${sender}, mint number=${mint_num})`
   );
 
   try {
@@ -97,7 +97,7 @@ const mintViaMeta = async (web3, sender, mint_num) => {
     const BASE = blocks[blocks.length - 1].baseFeePerGas;
     // const PRIORITY = blocks[blocks.length - 1].priorityFeePerGas[0]
     const PRIORITY = 2500000000;
-    const MAX = 2 * BASE + PRIORITY;
+    const MAX = 1.2 * BASE + PRIORITY;
 
     // console.log(BASE)
     // console.log(PRIORITY)
@@ -116,9 +116,11 @@ const mintViaMeta = async (web3, sender, mint_num) => {
         .mintNFTDuringPresale(mint_num.toString())
         .estimateGas(paramsEst);
 
+    console.log(`gas = ${gasLimit}`)
+    
     const params = {
       from: sender.toString(),
-      gas: parseInt(gasLimit * 1.1),
+      gas: parseInt(gasLimit * 1),
       value: VALUE,
       maxFeePerGas: MAX,
       maxPriorityFeePerGas: PRIORITY,
