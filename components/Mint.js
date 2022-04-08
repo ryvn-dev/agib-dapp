@@ -9,13 +9,13 @@ const plans = [
   {
     mint: 1,
     name: "One AGIB Girl",
-    ram: "0.05 ETH",
+    ram: "0.06 ETH",
     disk: "AGIB",
   },
   {
     mint: 2,
     name: "Two AGIB Girls",
-    ram: "0.09 ETH",
+    ram: "0.11 ETH",
     disk: "AGIB",
   },
 ];
@@ -63,7 +63,9 @@ function formatFeeHistory(result, includePending, historicalBlocks) {
 }
 
 const mintViaMeta = async (web3, sender, mint_num) => {
-  const VALUE = mint_num == 1 ? "50000000000000000" : "90000000000000000";
+
+  
+  const VALUE = mint_num == 1 ? "60000000000000000" : "110000000000000000";
   const MyContract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
 
   console.log("Contract Info");
@@ -85,6 +87,7 @@ const mintViaMeta = async (web3, sender, mint_num) => {
     // const gasLimit = block.gasLimit/block.transactions.length;
 
     // param=> block count, , PR
+
     const historicalBlocks = 4;
     const feeHistory = await web3.eth.getFeeHistory(
       historicalBlocks,
@@ -93,19 +96,18 @@ const mintViaMeta = async (web3, sender, mint_num) => {
     );
     const blocks = formatFeeHistory(feeHistory, false, historicalBlocks);
     console.log(blocks);
-
-    const BASE = blocks[blocks.length - 1].baseFeePerGas;
-    // const PRIORITY = blocks[blocks.length - 1].priorityFeePerGas[0]
+    
     const PRIORITY = 2500000000;
+
+
+    // const PRIORITY = blocks[blocks.length - 1].priorityFeePerGas[0]
+    const BASE = blocks[blocks.length - 1].baseFeePerGas;
     const MAX = parseInt(1.2 * BASE + PRIORITY);
 
-    // console.log(BASE)
-    // console.log(PRIORITY)
-    // console.log(MAX)
     
     try {
         const gasLimit = await MyContract.methods
-        .mintNFTDuringPresale(mint_num.toString())
+        .mintNFT(mint_num.toString())
         .estimateGas(paramsEst);
     } catch (err) {
         alert("Your ETH is not enough!")
@@ -113,7 +115,7 @@ const mintViaMeta = async (web3, sender, mint_num) => {
     }
     
     const gasLimit = await MyContract.methods
-        .mintNFTDuringPresale(mint_num.toString())
+        .mintNFT(mint_num.toString())
         .estimateGas(paramsEst);
 
     console.log(`gas = ${gasLimit}`)
@@ -128,10 +130,11 @@ const mintViaMeta = async (web3, sender, mint_num) => {
 
     console.log("Param Info");
     console.log(params);
+
     const t1 = await MyContract.methods.totalSupply().call();
     const receipt = await MyContract.methods
-      .mintNFTDuringPresale(mint_num.toString())
-      .send(params); //OK?
+      .mintNFT(mint_num.toString())
+      .send(params);
     const t2 = await MyContract.methods.totalSupply().call();
 
     console.log(`I have minted ${t2 - t1} NFTs`);
